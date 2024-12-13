@@ -43,6 +43,7 @@ interface Contributors: CoroutineScope {
 
         // Load stored params (user & password values)
         loadInitialParams()
+        setLoadingStatus("Ready to load", false)
     }
 
     fun loadContributors() {
