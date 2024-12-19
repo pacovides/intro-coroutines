@@ -12,38 +12,50 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-import java.util.Base64
+import java.util.*
 
 interface GitHubService {
+
     @GET("orgs/{org}/repos?per_page=100")
     fun getOrgReposCall(
-        @Path("org") org: String
+        @Path("org") org: String,
     ): Call<List<Repo>>
 
     @GET("repos/{owner}/{repo}/contributors?per_page=100")
     fun getRepoContributorsCall(
         @Path("owner") owner: String,
-        @Path("repo") repo: String
+        @Path("repo") repo: String,
     ): Call<List<User>>
+
+    @GET("orgs/{org}/repos?per_page=100")
+    suspend fun getOrgRepos(
+        @Path("org") org: String,
+    ): Response<List<Repo>>
+
+    @GET("repos/{owner}/{repo}/contributors?per_page=100")
+    suspend fun getRepoContributors(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+    ): Response<List<User>>
 }
 
 @Serializable
 data class Repo(
     val id: Long,
-    val name: String
+    val name: String,
 )
 
 @Serializable
 data class User(
     val login: String,
-    val contributions: Int
+    val contributions: Int,
 )
 
 @Serializable
 data class RequestData(
     val username: String,
     val password: String,
-    val org: String
+    val org: String,
 )
 
 @OptIn(ExperimentalSerializationApi::class)
