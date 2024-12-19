@@ -6,6 +6,7 @@ import retrofit2.Response
 import retrofit2.mock.Calls
 
 object MockGithubService : GitHubService {
+
     override fun getOrgReposCall(org: String): Call<List<Repo>> {
         return Calls.response(repos)
     }
@@ -13,9 +14,6 @@ object MockGithubService : GitHubService {
     override fun getRepoContributorsCall(owner: String, repo: String): Call<List<User>> {
         return Calls.response(reposMap.getValue(repo).users)
     }
-
-/*
-    // Uncomment the following implementations after adding these methods to GitHubService:
 
     override suspend fun getOrgRepos(org: String): Response<List<Repo>> {
         delay(reposDelay)
@@ -27,5 +25,5 @@ object MockGithubService : GitHubService {
         delay(testRepo.delay)
         return Response.success(testRepo.users)
     }
-*/
+
 }
