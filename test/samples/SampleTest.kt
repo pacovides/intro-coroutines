@@ -10,6 +10,7 @@ import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SampleTest {
+
     @Test
     fun testDelayInSuspend() = runTest {
         val realStartTime = System.currentTimeMillis()

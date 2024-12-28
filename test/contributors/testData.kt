@@ -29,7 +29,6 @@ val testRepos = listOf(
     )
 )
 
-
 val repos = testRepos.mapIndexed { index, testRepo -> Repo(index.toLong(), testRepo.name) }
 
 val reposMap = testRepos.associateBy { it.name }
@@ -55,7 +54,7 @@ val progressResults = listOf(
     ),
     TestResults(
         3200, // 2000 + 1200
-        listOf(User(login = "user-2", contributions = 50), User(login = "user-1", contributions = 50))
+        listOf(User(login = "user-1", contributions = 50), User(login = "user-2", contributions = 50))
     ),
     expectedResults
 )
@@ -67,8 +66,10 @@ val concurrentProgressResults = listOf(
     ),
     TestResults(
         2000, // 1000 + max(800, 1000)
-        listOf(User(login = "user-2", contributions = 70), User(login = "user-3", contributions = 60),
-            User(login = "user-1", contributions = 10))
+        listOf(
+            User(login = "user-2", contributions = 70), User(login = "user-3", contributions = 60),
+            User(login = "user-1", contributions = 10)
+        )
     ),
     expectedConcurrentResults
 )

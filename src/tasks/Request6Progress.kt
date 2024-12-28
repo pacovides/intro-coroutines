@@ -13,12 +13,9 @@ suspend fun loadContributorsProgress(
         .body() ?: emptyList()
 
     val users: MutableList<User> = mutableListOf()
-    for (repo: Repo in repos) {
+    for ((i, repo) in repos.withIndex()) {
         val newUsers = service.getRepoContributors(req.org, repo.name).also { logUsers(repo, it) }.body() ?: emptyList()
         users.addAll(newUsers)
-        updateResults(users.aggregate(), false)
+        updateResults(users.aggregate(), i == repos.lastIndex)
     }
-
-    //Could be avoided with a countdown in the loop above
-    updateResults(users.aggregate(), true)
 }
